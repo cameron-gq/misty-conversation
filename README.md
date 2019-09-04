@@ -24,32 +24,38 @@ DialogFlow is powered by Google machine learning and makes it easy to create con
 
 1. Create a new intent and call it "misty.age"
 
-1. Add Training phrases, Responses and click **Save**  
+1. Add Training phrases, Responses and click **Save**
 
-DialogFlow does NOT do a simple direct match to the Training phrases. Instead, it feeds the training phrases into it machine learning engine so that the intent will match on anything that's relatively close to the training phrases you enter.
+   ![Age Intent](/images/age_intent.png)
 
-![Age Intent](/images/age_intent.png)
+   NOTE: DialogFlow does NOT do a simple direct match to the Training phrases. Instead, it feeds the training phrases into a machine learning engine so that the intent will match on anything that's relatively close to the training phrases you enter.
+
 
 ### Create a Google Cloud Function
-When you created a Agent in DialogFlow it automatically create a corresponding Google Cloud Project and a Service Account used for authenticating requests. To send requests to DialogFlow, we have to send along an Access Token for authorization. Access Tokens expire in 1 hour. We could create a signed JWT in JavaScript as part of the Misty Skill, but this seems way too complex. Instead, we will create a Google Cloud Function that returns an Access Token for our ProjectID whenever we need one.
+When you create an Agent in DialogFlow it automatically creates a corresponding Google Cloud Project and a Service Account to use for authenticating requests. To send requests to DialogFlow, we have to send along an Access Token for authorization. Access Tokens only last 1 hour so we have to retrieve them often. We could create a signed JWT in JavaScript as part of the Misty Skill and get the Access Token directly, but this seems way too complex. Instead, we will create a Google Cloud Function that returns an Access Token for our ProjectID whenever we need one.
+
 1. Open Settings for your agent in DialogFlow
 
-1. Click on your Project Id to open up Google Cloud Platform for your project
-![Agent Settings](/images/agent_settings.png)
+1. Click on your Project ID to open up Google Cloud Platform for your project
+
+   ![Agent Settings](/images/agent_settings.png)
 
 1. Open Cloud Functions from the left side-panel
-![Cloud Functions](/images/cloud_functions.png)
+
+   ![Cloud Functions](/images/cloud_functions.png =500x)
 
 1. Start a Free Trial of GCP if necessary
 
 1. Click **Create function**
-![Create Function](/images/create_function.png)
+
+   ![Create Function](/images/create_function.png)
 
 1. Name your function "get-access-token"
-![Access Token Function](/images/access_token_function.png)
+
+   ![Access Token Function](/images/access_token_function.png =500x)
 
 1. Copy the code below into the **index.js** window
-```
+   ```
 const {GoogleAuth} = require('google-auth-library');
 
 /**
@@ -75,8 +81,9 @@ exports.getAccessToken = (req, res) => {
 
 };
 ```
+
 1. Copy the code below into the **package.json** window
-```
+   ```
 {
   "name": "get-access-token",
   "version": "0.0.1",
@@ -85,6 +92,7 @@ exports.getAccessToken = (req, res) => {
   }
 }
 ```
+
 1. Set the **Function to execute** to "getAccessToken"
 
 1. Click "Create"
@@ -93,7 +101,11 @@ exports.getAccessToken = (req, res) => {
 ### Set Up Misty Skill
 1. Copy the Cloud Functions Trigger URL and set it as the `getAccessTokenUrl` in Conversation.json
 
+   ![Triger URL](/images/trigger_url.png)
+
 1. Copy the Project ID from DialogFlow and set it as the `projectId` in Conversation.json
+
+   ![Project ID](/images/project_id.png)
 
 1. Upload Conversation.js and Conversation.json to Misty using the [Skill Runner](http://sdk.mistyrobotics.com/skill-runner/)
 
@@ -107,3 +119,7 @@ exports.getAccessToken = (req, res) => {
 
 ### Next Steps
 1. Open your Agent in DialogFlow and add as many new Intents as you want!
+
+   ![Jokes](/images/jokes.png)
+
+
