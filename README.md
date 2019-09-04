@@ -19,8 +19,8 @@ DialogFlow is powered by Google machine learning and makes it easy to create con
 1. Go to [DialogFlow](https://dialogflow.com/) and sign in
 
 1. Click "Create Agent", name it "Misty", choose "Create a new Google project" and click **Create** 
-   
-  ![Create Agent](/images/create_agent.png)
+
+   ![Create Agent](/images/create_agent.png)
 
 1. Create a new intent and call it "misty.age"
 
