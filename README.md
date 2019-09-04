@@ -81,7 +81,7 @@ exports.getAccessToken = (req, res) => {
 
 };
 ```
-
+   
 1. Copy the code below into the **package.json** window
 ```javascript
 {
@@ -92,20 +92,20 @@ exports.getAccessToken = (req, res) => {
   }
 }
 ```
-
+   
 1. Set the **Function to execute** to "getAccessToken"
 
 1. Click "Create"
 
 
-### Set Up Misty Skill
+### Configure and Upload the Conversation Skill to Misty
 1. Copy the Cloud Functions Trigger URL and set it as the `getAccessTokenUrl` in Conversation.json
 
-   ![Triger URL](/images/trigger_url.png)
+   <img src="/images/trigger_url.png" alt="Trigger" width="500">
 
 1. Copy the Project ID from DialogFlow and set it as the `projectId` in Conversation.json
 
-   ![Project ID](/images/project_id.png)
+   <img src="/images/project_id.png" alt="Trigger" width="700">
 
 1. Upload Conversation.js and Conversation.json to Misty using the [Skill Runner](http://sdk.mistyrobotics.com/skill-runner/)
 
