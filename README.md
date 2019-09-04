@@ -18,8 +18,7 @@ The skill uses Google DialogFlow so you can easily train Misty to recognize cust
 DialogFlow is powered by Google machine learning and makes it easy to create conversational interfaces by simply adding training phrases and fulfillment responses. We will use DialogFlow to take an audio recording from Misty, convert it to text, find an appropriate response based on the training phrases, and send an audio file of the response back to Misty.  
 1. Go to [DialogFlow](https://dialogflow.com/) and sign in
 
-1. Click "Create Agent", name it "Misty", choose "Create a new Google project" and click **Create**  
-
+1. Click "Create Agent", name it "Misty", choose "Create a new Google project" and click **Create** 
  ![Create Agent](/images/create_agent.png)
 
 1. Create a new intent and call it "misty.age"
