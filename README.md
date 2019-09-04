@@ -1,2 +1,85 @@
 # misty-conversation
-JavaScript Skill that allows you to have a conversation with Misty
+This JavaScript Skill lives on the Misty robot and allows you to have a conversation with Misty. 
+
+The skill uses Google DialogFlow so you can easily train Misty to recognize custom phrases and respond accordingly.
+
+## Requirements
+* Misty II robot
+* Google Cloud account with free trial or billing enabled
+
+## Video
+
+## How it works
+
+
+## Getting Started
+
+### Create an Agent in DialogFlow
+DialogFlow is powered by Google machine learning and makes it easy to create conversational interfaces by simply adding training phrases and fulfillment responses. We will use DialogFlow to take an audio recording from Misty, convert it to text, find an appropriate response based on the training phrases, and send an audio file of the response back to Misty.  
+1. Go to [DialogFlow](https://dialogflow.com/) and sign in
+1. Click "Create Agent", give it a name, and choose "Create a new Google project"
+(/images/create_agent.png)
+1. Create your first intent called "misty.age"
+1. Add training phrases and responses and click "Save"
+
+### Create Google Cloud Function
+1. Open Settings for your agent
+1. Click on your Project Id to open up Google Cloud Platform for your project
+1. Open Cloud Functions
+1. Start a Free Trial of GCP if necessary
+1. Click "Create function"
+1. Name your function "get-access-token"
+1. Copy the code below into the **index.js** window
+```
+const {GoogleAuth} = require('google-auth-library');
+
+/**
+ * Responds to any HTTP request.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
+exports.getAccessToken = (req, res) => {
+
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/cloud-platform'
+  });
+
+  const accessToken = auth.getAccessToken().then(responses => {
+    console.log(`  AccessToken: ${responses}`);
+    var jsonResult = {
+                        "accessToken" : responses
+                     };
+
+     res.status(200).send(jsonResult);
+  });
+
+};
+```
+1. Copy the code below into the **package.json** window
+```
+{
+  "name": "get-access-token",
+  "version": "0.0.1",
+  "dependencies": {
+    "google-auth-library" : "^5.2.0"
+  }
+}
+```
+1. Set the **Function to execute** to "getAccessToken"
+1. Click "Create"
+
+
+### Set Up Misty Skill
+1. Copy the Cloud Functions Trigger URL and set it as the `getAccessTokenUrl` in Conversation.json
+1. Copy the Project ID from DialogFlow and set it as the `projectId` in Conversation.json
+1. Upload Conversation.js and Conversation.json to Misty using the [Skill Runner](http://sdk.mistyrobotics.com/skill-runner/)
+
+### Talk to Misty
+1. Start the skill and say "Hey Misty"
+1. Wait for the beep and then say "How old are you?"
+1. Misty should respond with one of your phrases.
+
+
+### Next Steps
+1. Open your Agent in DialogFlow and add as many new Intents as you want!
