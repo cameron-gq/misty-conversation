@@ -55,7 +55,7 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
    <img src="/images/access_token_function.png" alt="Access Token Function" width="500">
 
 1. Copy the code below into the **index.js** window
-   ```
+```javascript
 const {GoogleAuth} = require('google-auth-library');
 
 /**
@@ -83,7 +83,7 @@ exports.getAccessToken = (req, res) => {
 ```
 
 1. Copy the code below into the **package.json** window
-   ```
+```javascript
 {
   "name": "get-access-token",
   "version": "0.0.1",
