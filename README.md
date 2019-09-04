@@ -42,7 +42,7 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
 
 1. Open Cloud Functions from the left side-panel
 
-   ![Cloud Functions](/images/cloud_functions.png | width=500)
+   <img src="/images/cloud_functions.png" alt="Cloud Functions" width="500">
 
 1. Start a Free Trial of GCP if necessary
 
