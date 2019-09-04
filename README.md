@@ -57,30 +57,30 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
 1. Copy the code below into the **index.js** window
 
       ```javascript
-const {GoogleAuth} = require('google-auth-library');
+        const {GoogleAuth} = require('google-auth-library');
 
-/**
- * Responds to any HTTP request.
- *
- * @param {!express:Request} req HTTP request context.
- * @param {!express:Response} res HTTP response context.
- */
-exports.getAccessToken = (req, res) => {
+        /**
+         * Responds to any HTTP request.
+         *
+         * @param {!express:Request} req HTTP request context.
+         * @param {!express:Response} res HTTP response context.
+         */
+        exports.getAccessToken = (req, res) => {
 
-  const auth = new GoogleAuth({
-    scopes: 'https://www.googleapis.com/auth/cloud-platform'
-  });
+          const auth = new GoogleAuth({
+            scopes: 'https://www.googleapis.com/auth/cloud-platform'
+          });
 
-  const accessToken = auth.getAccessToken().then(responses => {
-    console.log(`  AccessToken: ${responses}`);
-    var jsonResult = {
-                        "accessToken" : responses
-                     };
+          const accessToken = auth.getAccessToken().then(responses => {
+            console.log(`  AccessToken: ${responses}`);
+            var jsonResult = {
+                                "accessToken" : responses
+                             };
 
-     res.status(200).send(jsonResult);
-  });
+             res.status(200).send(jsonResult);
+          });
 
-};
+        };
       ```
 1. Copy the code below into the **package.json** window
 
