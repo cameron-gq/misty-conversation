@@ -48,11 +48,11 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
 
 1. Click **Create function**
 
-   ![Create Function](/images/create_function.png)
+   <img src="/images/create_function.png" alt="Create Function" width="600">
 
 1. Name your function "get-access-token"
 
-   ![Access Token Function](/images/access_token_function.png =500x)
+   <img src="/images/access_token_function.png" alt="Access Token Function" width="500">
 
 1. Copy the code below into the **index.js** window
    ```
