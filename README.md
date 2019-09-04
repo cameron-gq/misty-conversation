@@ -8,9 +8,7 @@ The skill uses Google DialogFlow so you can easily train Misty to recognize cust
 * Google Cloud account with free trial or billing enabled
 
 ## Video
-
-## How it works
-
+[![](http://img.youtube.com/vi/5mBCmfMfxTE/0.jpg)](http://www.youtube.com/watch?v=5mBCmfMfxTE "Misty Conversation Demo Video")
 
 ## Getting Started
 
