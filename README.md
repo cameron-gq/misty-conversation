@@ -99,11 +99,11 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
 
 
 ### Configure and Upload the Conversation Skill to Misty
-1. Copy the Cloud Functions Trigger URL and set it as the `getAccessTokenUrl` in Conversation.json
+1. Copy the Cloud Functions Trigger URL and set it as the `getAccessTokenUrl` in **Conversation.json**
 
    <img src="/images/trigger_url.png" alt="Trigger" width="500">
 
-1. Copy the Project ID from DialogFlow and set it as the `projectId` in Conversation.json
+1. Copy the Project ID from DialogFlow and set it as the `projectId` in **Conversation.json**
 
    <img src="/images/project_id.png" alt="Trigger" width="700">
 
