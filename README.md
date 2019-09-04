@@ -20,13 +20,13 @@ DialogFlow is powered by Google machine learning and makes it easy to create con
 
 1. Click "Create Agent", name it "Misty", choose "Create a new Google project" and click **Create** 
 
-   ![Create Agent](/images/create_agent.png)
+   <img src="/images/create_agent.png" alt="Create Agent" width="700">
 
 1. Create a new intent and call it "misty.age"
 
 1. Add Training phrases, Responses and click **Save**
 
-   ![Age Intent](/images/age_intent.png)
+   <img src="/images/age_intent.png" alt="Age Intent" width="700">
 
    NOTE: DialogFlow does NOT do a simple direct match to the Training phrases. Instead, it feeds the training phrases into a machine learning engine so that the intent will match on anything that's relatively close to the training phrases you enter.
 
@@ -38,7 +38,7 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
 
 1. Click on your Project ID to open up Google Cloud Platform for your project
 
-   ![Agent Settings](/images/agent_settings.png)
+   <img src="/images/agent_settings.png" alt="Agent Settings" width="700">
 
 1. Open Cloud Functions from the left side-panel
 
@@ -81,7 +81,6 @@ exports.getAccessToken = (req, res) => {
 
 };
 ```
-   
 1. Copy the code below into the **package.json** window
 ```javascript
 {
@@ -92,7 +91,6 @@ exports.getAccessToken = (req, res) => {
   }
 }
 ```
-   
 1. Set the **Function to execute** to "getAccessToken"
 
 1. Click "Create"
