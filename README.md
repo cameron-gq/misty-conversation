@@ -55,7 +55,8 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
    <img src="/images/access_token_function.png" alt="Access Token Function" width="500">
 
 1. Copy the code below into the **index.js** window
-```javascript
+
+      ```javascript
 const {GoogleAuth} = require('google-auth-library');
 
 /**
@@ -80,17 +81,18 @@ exports.getAccessToken = (req, res) => {
   });
 
 };
-```
+      ```
 1. Copy the code below into the **package.json** window
-```javascript
-{
-  "name": "get-access-token",
-  "version": "0.0.1",
-  "dependencies": {
-    "google-auth-library" : "^5.2.0"
-  }
-}
-```
+
+      ```javascript
+        {
+            "name": "get-access-token",
+            "version": "0.0.1",
+            "dependencies": {
+                "google-auth-library" : "^5.2.0"
+            }
+        }
+      ```
 1. Set the **Function to execute** to "getAccessToken"
 
 1. Click "Create"
@@ -118,6 +120,6 @@ exports.getAccessToken = (req, res) => {
 ### Next Steps
 1. Open your Agent in DialogFlow and add as many new Intents as you want!
 
-   ![Jokes](/images/jokes.png)
+   <img src="/images/joke.png" alt="Jokes" width="700">
 
 
