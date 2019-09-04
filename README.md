@@ -18,17 +18,32 @@ The skill uses Google DialogFlow so you can easily train Misty to recognize cust
 DialogFlow is powered by Google machine learning and makes it easy to create conversational interfaces by simply adding training phrases and fulfillment responses. We will use DialogFlow to take an audio recording from Misty, convert it to text, find an appropriate response based on the training phrases, and send an audio file of the response back to Misty.  
 1. Go to [DialogFlow](https://dialogflow.com/) and sign in
 1. Click "Create Agent", give it a name, and choose "Create a new Google project"
+
 ![Create Agent](/images/create_agent.png)
+
 1. Create your first intent called "misty.age"
-1. Add training phrases and responses and click "Save"
+
+![Age Intent](/images/age_intent.png)
+
+1. Add Training phrases, Responses and click "Save"
 
 ### Create Google Cloud Function
-1. Open Settings for your agent
+1. Open Settings for your agent in DialogFlow
 1. Click on your Project Id to open up Google Cloud Platform for your project
+
+![Agent Settings](/images/agent_settings.png)
+
 1. Open Cloud Functions
+
+![Cloud Functions](/images/cloud_functions.png)
+
 1. Start a Free Trial of GCP if necessary
 1. Click "Create function"
+
+![Create Function](/images/create_function.png)
+
 1. Name your function "get-access-token"
+
 1. Copy the code below into the **index.js** window
 ```
 const {GoogleAuth} = require('google-auth-library');
@@ -67,6 +82,9 @@ exports.getAccessToken = (req, res) => {
 }
 ```
 1. Set the **Function to execute** to "getAccessToken"
+
+![Access Token Function](/images/access_token_function.png)
+
 1. Click "Create"
 
 
