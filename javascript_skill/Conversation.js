@@ -23,7 +23,19 @@
  *  SOFTWARE.
 */
 
+
+SetVolumeForSkill();
+
 GetAccessToken();
+
+
+/* 
+ * Set the volume to 60% to work around the bug where Misty records silent audio
+ * https://community.mistyrobotics.com/t/misty-records-silent-audio-files/2146
+ */
+function SetVolumeForSkill(){
+    misty.SetDefaultVolume(60);
+}
 
 
 /* 
@@ -55,33 +67,45 @@ function SetAccessToken(data) {
  */
 function StartListening() {
 
-    misty.StartKeyPhraseRecognition();
+
+    // Registers a listener for VoiceRecord event messages, and adds return
+    // properties to event listener so that we get all this data in the
+    // _VoiceRecord callback.
+    misty.AddReturnProperty("VoiceRecord", "Filename");
+    misty.AddReturnProperty("VoiceRecord", "Success");
+    misty.AddReturnProperty("VoiceRecord", "ErrorCode");
+    misty.AddReturnProperty("VoiceRecord", "ErrorMessage");
+    misty.RegisterEvent("VoiceRecord", "VoiceRecord", 10, false);
+
     misty.RegisterEvent("KeyPhraseRecognized","KeyphraseRecognized", 10, false);
+
+    misty.StartKeyPhraseRecognition();
+
     misty.Debug("Misty is listening and will beep when she hears 'Hey Misty'.");
 
 }
 
 /* 
- * Plays a sound and changes LED colors to signal recording. Gets the audio file 
- * when done recording for processing.
+ * This gets called after the StartKeyPhrase recording has finished.
+ * Use the audio file name to get the audio file and process.
  */
-function _KeyPhraseRecognized() {
+function _VoiceRecord(data) {
 
-    let audioFileName = "temp_input_audio.wav";
+    //misty.Debug("voice record data: " + JSON.stringify(data));
 
-    misty.PlayAudio("002-Weerp.wav", 100);
-
-    misty.StartRecordingAudio(audioFileName);
-    misty.ChangeLED(28, 230, 7); //green
-
-    misty.Pause(4000);
-
-    misty.StopRecordingAudio();
-    misty.ChangeLED(224, 12, 12); // red
-
-    misty.GetAudioFile(audioFileName, "ProcessAudioFile");
-
-}
+    // Get data from AdditionalResults array
+    var audioFileName = data.AdditionalResults[0];
+    var success = data.AdditionalResults[1];
+    var errorCode = data.AdditionalResults[2];
+    var errorMessage = data.AdditionalResults[3];
+ 
+    if (success = true) {
+        misty.Debug("Successfully captured speech!");
+        misty.GetAudioFile(audioFileName, "ProcessAudioFile");
+    } else {
+       misty.Debug("Error: " + errorCode + ". " + errorMessage);
+    }
+ }
 
 /* 
  * Sends the audio file as Base64 to the DialogFlow project where speech-to-text
@@ -106,7 +130,7 @@ function ProcessAudioFile(data) {
             "audioConfig": {
                 "audioEncoding": "AUDIO_ENCODING_LINEAR_16",
                 "languageCode": "en-US",
-                "sampleRateHertz": 48000
+                "sampleRateHertz": 16000
             }
         },
         "inputAudio": base64,
