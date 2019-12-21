@@ -168,6 +168,16 @@ function ProcessDialogFlowResponse(data) {
     misty.Debug("Ouput text: " + response.queryResult.fulfillmentText);
 
     let audioData = response.outputAudio;
+    let fulfillment = response.queryResult.fulfillmentText;
+
+    if(fulfillment === "batteryLevel"){
+
+        misty.GetBatteryLevel("ProcessBatteryLevel");
+        return;
+
+    }
+
+    
 
     misty.ChangeLED(0, 173, 239); // blue
 
@@ -188,4 +198,78 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+/*
+ * This function allows you to ask Misty her battery level.  To make this work:
+ * 1. Enable Google Cloud Text-to-Speech API in your Google Cloud project:
+ *        https://console.cloud.google.com/flows/enableapi?apiid=texttospeech.googleapis.com
+ * 2. Create an intent in DialogFlow called misty.battery
+ * 3. Add the training phrase "What's your battery level?"
+ * 4. Add a text response "batteryLevel"
+ * 
+ * When ProcessDialogFlowResponse gets a response text of "batteryLevel", it calls this function
+ * which get's Misty's battery level and then generates an speech response
+*/
+function ProcessBatteryLevel(data){
+    
+    //misty.Debug("Process Battery Level:" + JSON.stringify(data));
+    let chargePercent = data.Result.ChargePercent;
 
+    misty.Debug("Battery Level:" + chargePercent);
+
+    let chargeText = (chargePercent * 100);
+    chargeText = parseInt(chargeText, 10);
+
+    misty.Debug("charge  text:" + chargeText);
+
+    let batteryText = "My battery is at " + chargeText + " percent.";
+
+    GetSpeech(batteryText);
+
+}
+
+
+function GetSpeech(inputText){
+
+    var speechParams = JSON.stringify({
+        'input':{
+            'text': inputText
+          },
+          'voice':{
+            'languageCode':'en-US',
+            "name": "en-US-Wavenet-C",
+            "ssmlGender": "FEMALE"
+          },
+          'audioConfig':{
+            'audioEncoding':'LINEAR16',
+            "speakingRate": 1,
+                "pitch": 5,
+                "volumeGainDb": 0,
+            "effectsProfileId": []
+          }
+    });
+
+    let url = "https://texttospeech.googleapis.com/v1beta1/text:synthesize";
+    let authorizationType =  "Bearer";
+    let accessToken = misty.Get("googleAccessToken");
+
+    misty.SendExternalRequest("POST", url, authorizationType, accessToken, speechParams, false, false, null, "application/json", "ProcessSpeechResults");
+
+}
+
+
+function ProcessSpeechResults(data){
+
+    let response = JSON.parse(data.Result.ResponseObject.Data)
+    //misty.Debug("Speech response: " + JSON.stringify(response));
+
+    let audioData = response.audioContent;
+
+    misty.ChangeLED(0, 173, 239); // blue
+
+    // this skill seems to be more reliable when we cycle through 
+    // different audio files instead of using the same one each time
+    let outputFilename = getRandomInt(50) + "_temp_output_audio.wav";
+
+    misty.SaveAudio(outputFilename, audioData, true, true);
+
+}
