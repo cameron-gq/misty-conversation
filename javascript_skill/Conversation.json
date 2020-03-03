@@ -1,6 +1,6 @@
 {
 	"Name": "Conversation",
-    "UniqueId": "b9988781-17dd-44a2-ada5-773c6c9b6f98",
+    "UniqueId": "b99a8381-19fd-54a2-acd6-773d7c9b6f96",
 	"Description": "Conversation",
 	"StartupRules": ["Manual", "Startup"],
 	"Language": "javascript",
@@ -9,7 +9,10 @@
 	"CleanupOnCancel": false,
 	"WriteToLog": false,
 	"Parameters": {
-        "projectId" : "YOUR_GOOGLE_CLOUD_PROJECT_ID",
-        "getAccessTokenUrl" : "YOUR_GOOGLE_CLOUD_FUNCTIONS_TRIGGER_URL"
+		"projectId" : "YOUR_GOOGLE_CLOUD_PROJECT_ID",
+		"private_key_id": "YOUR_GOOGLE_CLOUD_SERVICE_ACCOUNT_PRIVATE_KEY_ID",
+		"private_key": "YOUR_GOOGLE_CLOUD_SERVICE_ACCOUNT_PRIVATE_KEY",
+		"client_email": "YOUR_GOOGLE_CLOUD_SERVICE_ACCOUNT_CLIENT_EMAIL",
+		"scopes" : "https://www.googleapis.com/auth/cloud-platform"
 	}
 }
