@@ -216,7 +216,10 @@ function _VoiceRecord(data) {
  */
 function ProcessAudioFile(data) {
 
-    const USE_GOOGLE_VOICE_FOR_SPEECH = false;
+    // Set this to false to use Misty's internal TTS functionality, which will
+    // be faster, because audio must not be sent in the response.  However, using
+    // Google for speech gives you more control over the sound of the voice.
+    const USE_GOOGLE_VOICE_FOR_SPEECH = true
 
     misty.Debug(JSON.stringify(data));
 
