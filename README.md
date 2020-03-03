@@ -40,7 +40,7 @@ When you create an Agent in DialogFlow it automatically creates a corresponding 
 
 1. Open the menu for the Service Account named "DialogFlow Integrations" and choose "Create Key"
 
-   <img src="/images/create_key.png" alt="Create Key" width="500">
+   <img src="/images/create_key.png" alt="Create Key" width="700">
 
 1. Choose JSON for the key type and click "Create". A JSON file will automatically download to your computer.
 
