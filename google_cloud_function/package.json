@@ -1,7 +1,0 @@
-{
-  "name": "get-access-token",
-  "version": "0.0.1",
-  "dependencies": {
-    "google-auth-library" : "^5.2.0"
-  }
-}
